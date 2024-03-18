@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { ProductService } from '../../services/product.service';
+import { error } from 'console';
+import { ProductInterface } from '../../interfaces/product.interface';
 
 @Component({
   selector: 'app-product',
@@ -9,6 +10,22 @@ import { Observable } from 'rxjs';
   templateUrl: './product.component.html',
   styleUrl: './product.component.css',
 })
-export class ProductComponent {
+export class ProductComponent implements OnInit {
+  productList: ProductInterface[] = [];
+  constructor(private productService: ProductService) {}
 
+  ngOnInit(): void {
+    this.getProducts();
+  }
+
+  getProducts() {
+    this.productService.getProducts().subscribe({
+      next: (result) => {
+        this.getProducts = result;
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
 }

@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ProductService {
 
-  API_URL: string = 'https://pokeapi.co/api/v2/pokemon/ditto';
+  API_URL: string = 'https://api.chucknorris.io/jokes/random';
   constructor(private httpClient: HttpClient) {}
 
   getProducts() : Observable<any> {
